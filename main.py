@@ -25,27 +25,50 @@ def hoverIt(driver,element):
     action.perform()
 
 opts = Options()
+
+
+
 agent = 'user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36'
 opts.add_argument(agent)
 driver = webdriver.Chrome(chrome_options=opts,executable_path='chromedriver.exe')
 driver.get("https://www.tesla.com/inventory/used/ms?arrangeby=plh&zip=95113")
-driver.maximize_window()
+driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
+# driver.maximize_window()
+# driver.set_window_size(625, 11003)
 time.sleep(2)
 total_sections = driver.find_elements(By.TAG_NAME,'article')
-print(len(total_sections))
+# print(len(total_sections))
 
 for main_article in total_sections:
-    print(main_article.text)
+    # print(main_article.text)
     loc_main = main_article.location_once_scrolled_into_view
-    hoverIt(driver,main_article)
+   
     time.sleep(.5)
     btns = main_article.find_elements(By.TAG_NAME,'button')
     for btn in btns:
         loc = btn.location_once_scrolled_into_view
-        print(btn.text)
+        # print(btn.text)
         if btn.text == 'VIEW DETAILS':
             clickIt(driver,btn)
-        print(len(driver.window_handles))
 
-time.sleep(5)
-driver.quit()
+            total_div = driver.find_elements(By.TAG_NAME,'div')
+            for show_div in total_div:
+                print(show_div.text,"----------")
+
+ 
+
+    
+            
+         
+            
+        # total_div = driver.find_elements(By.CLASS_NAME,'tds-list--unordered')
+        # for i in total_div:
+        #     print(i.text,"======")
+        
+       
+           
+            
+        # print(len(driver.window_handles))
+
+time.sleep(2)
+# driver.quit()
