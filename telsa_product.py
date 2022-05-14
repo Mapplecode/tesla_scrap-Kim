@@ -24,12 +24,12 @@ time.sleep(2)
 total_sections = driver.find_elements(By.TAG_NAME,'article')
 for main_article in total_sections:
     loc_main = main_article.location_once_scrolled_into_view
-    print(main_article.text)
+    # print(main_article.text)
     time.sleep(.5)
     btns = main_article.find_elements(By.TAG_NAME,'button')
     for btn in btns:
         loc = btn.location_once_scrolled_into_view
-        print(btn.text)
+        # print(btn.text)
       
         if btn.text == 'VIEW DETAILS':
             clickIt(driver,btn)
